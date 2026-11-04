@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>法律法规智能问答系统（lawrag）· 项目概览</title>
+<title>LexRAG · 法规检索与合规取证引擎 · 项目概览</title>
 <style>
   :root{--bg:#f5f6fa;--paper:#fff;--ink:#1f2430;--sub:#5b6472;--line:#e3e7ef;
         --brand:#1f3b73;--brand2:#2f6bd8;--gold:#c8a24a;--ok:#1f9d6b;--warn:#c9793a;
@@ -51,7 +51,7 @@
 <header class="hero">
   <div class="wrap">
     <p class="kicker">RAG Project · 法律法规智能问答</p>
-    <h1>法律法规智能问答系统（lawrag）</h1>
+    <h1>LexRAG <span style="font-size:16px;opacity:.85">法规检索与合规取证引擎</span></h1>
     <p class="lede">
       一个中文法律领域的 RAG 问答系统：<b>快问快答通道</b>承接能精确命中的问题（原句、条文号引用），
       其余交给 <b>RAG 通道</b>——法条与问答双路召回、精排后送进上下文，让大模型<b>基于检索到的条文</b>作答；
@@ -65,10 +65,10 @@
       <span class="badge">RAGAS 评测体系</span>
     </div>
     <div class="metric-grid">
-      <div class="metric"><div class="n">288<small>部</small></div><div class="l">现行有效法律（法律级全覆盖）</div></div>
+      <div class="metric"><div class="n">292<small>部</small></div><div class="l">法律文件（现行 288 + 历史版本 4）</div></div>
       <div class="metric"><div class="n">21,312<small>条</small></div><div class="l">法条原文（另存 253 条历史版本）</div></div>
       <div class="metric"><div class="n">20,000<small>条</small></div><div class="l">领域均衡法律问答（引用 100% 可回溯）</div></div>
-      <div class="metric"><div class="n">55,847<small>块</small></div><div class="l">法条向量子块 + 2 万条问答向量</div></div>
+      <div class="metric"><div class="n">21,565<small>块</small></div><div class="l">法条向量子块 + 2 万条问答向量</div></div>
     </div>
   </div>
 </header>
@@ -85,13 +85,13 @@
         <td>错误抢答 <b>54 → 0</b>；真实法律问题进 RAG <b>10% → 99%</b>；库内原句 <b>200/200</b> 仍秒回</td></tr>
       <tr><td><b>法条级分块</b></td>
         <td>不用固定长度切分：<b>子块 = 一条完整法条</b>（天然带条文号，便于引用），<b>父块 = 同法连续 5 条</b>（上下文完整）</td>
-        <td>21,565 条法条 → <b>55,847 子块 / 4,352 父块</b>；抽样解析率 <b>100%</b></td></tr>
+        <td>21,565 条法条 → <b>21,565 子块 / 4,352 父块</b>；抽样解析率 <b>100%</b></td></tr>
       <tr><td><b>混合检索 + 精排</b></td>
         <td>BGE-M3 稠密 + 稀疏双路召回 → WeightedRanker 粗排 → 父块去重 → BGE-Reranker 精排取 Top-2</td>
-        <td>Recall@5 <b>0.824</b>；MRR 0.7150 → <b>0.7188</b>；检索耗时 69 → 237 ms</td></tr>
+        <td>Recall@5 0.824 → <b>0.901</b>；MRR 0.7188 → <b>0.7919</b>；检索耗时 69 → 237 ms</td></tr>
       <tr><td><b>第三召回源</b></td>
         <td>把 2 万条法律问答单独建向量集合接入 RAG（法条集合强制时效过滤，问答无该字段，故独立建集合）</td>
-        <td>参考条文覆盖率 <b>65% → 75%</b>；兜底拒答率 <b>24% → 5%</b></td></tr>
+        <td>参考条文覆盖率 <b>65% → 79%</b>；兜底拒答率 <b>24% → 5%</b></td></tr>
       <tr><td><b>条文号精确路由</b></td>
         <td>查询出现《X法》第 Y 条时直查 MySQL，返回条文 + 编/章/节 + 施行日期；有历史版本时主动提示</td>
         <td>确定性查询不走向量检索，0.3 秒返回</td></tr>
@@ -139,7 +139,7 @@
       <tr><td>法条语料</td><td>每部法律一个 <code>.txt</code>，正文只有法条行</td><td>292 个文件<br>（288 现行 + 4 历史）</td><td><code>tools/expand_law_corpus.py</code></td></tr>
       <tr><td>法条表</td><td>正文 + 编/章/节 + 公布日 / 施行日 / 时效状态</td><td><b>21,565 条</b></td><td><code>tools/import_law_data.py</code></td></tr>
       <tr><td>法律问答</td><td>领域均衡、引用可核对</td><td><b>20,000 条</b></td><td><code>tools/sample_law_faq.py</code></td></tr>
-      <tr><td>法条向量</td><td>子块 = 单条法条，父块 = 连续 5 条</td><td><b>55,847 子块</b></td><td><code>tools/build_law_index.py --reset</code></td></tr>
+      <tr><td>法条向量</td><td>子块 = 单条法条，父块 = 连续 5 条</td><td><b>21,565 子块</b></td><td><code>tools/build_law_index.py --reset</code></td></tr>
       <tr><td>问答向量</td><td>RAG 第三召回源</td><td><b>20,000 条</b></td><td><code>tools/build_lawfaq_index.py --reset</code></td></tr>
       <tr><td>意图分类</td><td>通用知识 / 法律咨询 二分类</td><td>5,000 条</td><td><code>tools/train_law_classifier.py</code></td></tr>
     </tbody>
@@ -165,8 +165,8 @@
     <tbody>
       <tr><td>快通道 · 错误抢答</td><td><b>54 → 0</b></td><td>100 条真实法律问题</td></tr>
       <tr><td>快通道 · 库内原句秒回</td><td><b>200/200</b></td><td>问答库内原始问题</td></tr>
-      <tr><td>检索 · Recall@5 / MRR</td><td><b>0.824</b> / 0.7188</td><td>1000 条随机样本，按父块评</td></tr>
-      <tr><td>上下文 · 条文覆盖率</td><td><b>65% → 75%</b></td><td>参考答案引用条文被覆盖比例</td></tr>
+      <tr><td>检索 · Recall@5 / MRR</td><td><b>0.901</b> / 0.7919</td><td>1000 条随机样本，按父块评</td></tr>
+      <tr><td>上下文 · 条文覆盖率</td><td><b>65% → 79%</b></td><td>参考答案引用条文被覆盖比例</td></tr>
       <tr><td>生成 · 兜底拒答率</td><td><b>24% → 5%</b></td><td>100 条答案里"未找到依据"占比</td></tr>
       <tr><td>生成 · 含条文引用</td><td><b>88 → 97</b> / 100</td><td>回答里出现《法律名》第 X 条</td></tr>
       <tr><td>生成 · RAGAS 忠实度</td><td><b>0.899</b></td><td>100 条领域均衡评测集</td></tr>
