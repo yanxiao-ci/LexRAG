@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-生成 lawrag（法律法规智能问答）项目流程图（标准流程图符号 / SVG）。
+生成 LexRAG（法规检索与合规取证引擎）项目流程图（标准流程图符号 / SVG）。
 仅使用 Python 标准库，不依赖第三方包。
 
 画的是**代码里真实执行的流程**（2026-10-14 法律方向改造后的版本）。
@@ -188,7 +188,7 @@ W4, H4 = 1920, 1760
 
 def fig_overview():
     g, a, n = [], [], []
-    g.append(title(W1 / 2.0, "lawrag 法律法规智能问答项目 · 总体流程图",
+    g.append(title(W1 / 2.0, "LexRAG 法规检索与合规取证引擎 · 总体流程图",
                    "离线准备（一次性） → 在线问答（每次请求） → 效果评估（迭代优化）"))
 
     # ---------------- A 离线准备 ----------------
@@ -197,7 +197,7 @@ def fig_overview():
     a1 = (70, yA1, 250, 84, "法律法规原文 .txt\n292 部 · 4.2 MB", "io", 14)
     a2 = (350, yA1, 250, 84, "法条解析 + 边界切分\n子块 = 单条法条\n父块 = 同法连续 5 条", "proc", 13)
     a3 = (630, yA1, 250, 84, "BGE-M3 向量化\n稠密 1024 维 + 稀疏向量", "proc", 13)
-    a4 = (910, yA1, 250, 84, "写入 Milvus\n集合 lawrag · 55,847 块", "store", 13)
+    a4 = (910, yA1, 250, 84, "写入 Milvus\n集合 lawrag · 21,565 块", "store", 13)
     a5 = (1190, yA1, 250, 84, "法条结构化入库\nMySQL law_articles · 21,565 条", "store", 13)
     a6 = (1470, yA1, 340, 84, "字段：法律名 · 条号 · 编/章/节\n公布日 · 施行日 · 时效状态", "note", 13)
     for t in (a1, a2, a3, a4, a5, a6):
@@ -345,7 +345,7 @@ def fig_indexing():
 
     y2 = 326
     u1 = (70, y2, 320, 86, "BGE-M3 向量化\n稠密 1024 维 + 稀疏向量", "proc", 13)
-    u2 = (410, y2, 320, 86, "upsert 写入 Milvus\n集合 lawrag · 55,847 块", "store", 13)
+    u2 = (410, y2, 320, 86, "upsert 写入 Milvus\n集合 lawrag · 21,565 块", "store", 13)
     u3 = (750, y2, 1000, 86, "集合字段：id · text · dense_vector · sparse_vector · parent_id · parent_content\nsource(=law) · law_name · article_no · chapter · status（检索强制 status ==「有效」）", "note", 13)
     for t in (u1, u2, u3):
         n.append(node(*t))

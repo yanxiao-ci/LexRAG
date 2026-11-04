@@ -26,7 +26,7 @@ from rag_qa.core import hr_compliance
 from new_main import IntegratedQASystem
 
 # 创建应用实例
-app = FastAPI(title="法律法规智能问答API", description="法律法规智能问答助手（法条检索 + 法律问答 + RAG）")
+app = FastAPI(title="LexRAG API", description="LexRAG 法规检索与合规取证引擎（法条检索 + 法律问答 + 合规检查）")
 
 # 配置CORS，允许前端访问
 app.add_middleware(
@@ -52,15 +52,15 @@ tool_search_lock = threading.Lock()
 GREETING_PATTERNS = [
     {
         "pattern": r"^(你好|您好|hi|Hi|hello|Hello)",
-        "response": "你好！我是法律法规智能问答助手，可以帮你查法条、答法律问题，很高兴为你服务。"
+        "response": "你好！我是 LexRAG 法规检索助手，可以帮你查法条、答法律问题，很高兴为你服务。"
     },
     {
         "pattern": r"^(你是谁|您是谁|你叫什么|你的名字|who are you|你能做什么|你会什么)",
-        "response": "我是法律法规智能问答助手，覆盖 288 部现行法律（21,312 条法条）和 2 万条法律问答。你可以直接问「《民法典》第一千零六十二条讲什么」，也可以问「买到假货怎么赔」这类实际问题，回答会标注《法律名》第 X 条。"
+        "response": "我是 LexRAG 法规检索助手，覆盖 292 部法律（2.1 万条法条）和 2 万条法律问答。你可以直接问「《民法典》第一千零六十二条讲什么」，也可以问「买到假货怎么赔」这类实际问题，回答会标注《法律名》第 X 条。"
     },
     {
         "pattern": r"^(在吗|在不在|有人吗|在不)",
-        "response": "我在！我是法律法规智能问答助手，随时为你解答法律问题。"
+        "response": "我在！我是 LexRAG 法规检索助手，随时为你解答法律问题。"
     },
     {
         "pattern": r"^(干嘛呢|你在干嘛|做什么)",

@@ -67,7 +67,7 @@
 <path d="M 410.0 341.0 A 160.0 15.0 0 0 1 730.0 341.0 L 730.0 397.0 A 160.0 15.0 0 0 1 410.0 397.0 Z" fill="#f3e8ff" stroke="#7c3aed" stroke-width="2.0"/>
 <ellipse cx="570.0" cy="341.0" rx="160.0" ry="15.0" fill="none" stroke="#7c3aed" stroke-width="2.0"/>
 <text x="570.0" y="368.7" font-size="13" font-weight="normal" fill="#1e293b" text-anchor="middle" dominant-baseline="middle" font-family="Microsoft YaHei, PingFang SC, Segoe UI, sans-serif">upsert 写入 Milvus</text>
-<text x="570.0" y="385.8" font-size="13" font-weight="normal" fill="#1e293b" text-anchor="middle" dominant-baseline="middle" font-family="Microsoft YaHei, PingFang SC, Segoe UI, sans-serif">集合 lawrag · 55,847 块</text>
+<text x="570.0" y="385.8" font-size="13" font-weight="normal" fill="#1e293b" text-anchor="middle" dominant-baseline="middle" font-family="Microsoft YaHei, PingFang SC, Segoe UI, sans-serif">集合 lawrag · 21,565 块</text>
 <rect x="750.0" y="326.0" width="1000.0" height="86.0" rx="8" ry="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="7 5"/>
 <text x="1250.0" y="360.4" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle" dominant-baseline="middle" font-family="Microsoft YaHei, PingFang SC, Segoe UI, sans-serif">集合字段：id · text · dense_vector · sparse_vector · parent_id · parent_content</text>
 <text x="1250.0" y="377.6" font-size="13" font-weight="normal" fill="#475569" text-anchor="middle" dominant-baseline="middle" font-family="Microsoft YaHei, PingFang SC, Segoe UI, sans-serif">source(=law) · law_name · article_no · chapter · status（检索强制 status ==「有效」）</text>
